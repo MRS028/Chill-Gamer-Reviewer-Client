@@ -1,17 +1,26 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import AuthProvider, { AuthContext } from "../Provider/AuthProvider";
 
 const Register = () => {
+  const {user} = useContext(AuthContext);
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-
+console.log(user);
   const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const password = formData.get("password");
 
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const name = form.get("name");
+    const email = form.get("email");
+    const photourl = form.get("photourl");
+    const password = form.get("password");
+    const FormInfo = {name,email,photourl,password};
+
+
+    console.log(FormInfo);
    
     if (!/[A-Z]/.test(password)) {
       setPasswordError("Password must contain at least one uppercase letter.");
@@ -27,8 +36,8 @@ const Register = () => {
     }
 
     setPasswordError(""); 
-    alert("Form submitted successfully!");
-    formData('');
+   
+    
   };
 
   const handleGoogleSignIn = () => {
