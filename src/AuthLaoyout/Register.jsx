@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import AuthProvider, { AuthContext } from "../Provider/AuthProvider";
@@ -7,12 +7,13 @@ import Swal from "sweetalert2";
 
 const Register = () => {
   // Export from Authprovider
-  const { createNewUser ,user,setUser} = useContext(AuthContext);
-  
+  const { createNewUser ,user,setUser,signInWithGoogle} = useContext(AuthContext);
+
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   //  console.log(user);
-
+ const navigate = useNavigate();
+ const location =useLocation();
   // Form submit Section
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,10 +24,10 @@ const Register = () => {
     const password = form.get("password");
     const FormInfo = { name, email, photourl, password };
 
-    console.log(FormInfo);
+    // console.log(FormInfo);
     createNewUser(email, password)
       .then((result) => {
-       
+        navigate("/");
         const user = result.user;
         setUser(user);
         console.log(user);
@@ -62,12 +63,28 @@ const Register = () => {
   };
 
   const handleGoogleSignIn = () => {
-    alert("Google Sign-In Clicked!");
+    signInWithGoogle()
+      .then((result) => {
+        
+        console.log(result);
+          navigate("/"); 
+          Swal.fire({
+            title: "Registration Successful!",
+            text: "Welcome to our platform!",
+            icon: "success", 
+            confirmButtonText: "OK",
+          });
+      
+      })
+      .catch((error) => {
+        console.log("ERROR", error.message);
+        
+      });
   };
 
   return (
     <div className="flex min-h-screen items-center justify-center md:my-8">
-      <div className="w-11/12 max-w-md bg-white rounded-lg shadow-md p-6 border">
+      <div className="w-11/12 max-w-md bg-gray-100 rounded-lg shadow-md p-6 border">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
           Register
         </h2>

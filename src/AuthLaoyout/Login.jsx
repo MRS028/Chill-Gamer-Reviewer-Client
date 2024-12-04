@@ -1,82 +1,85 @@
 import React, { useContext, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
-  const { userLogin, setUser, user } = useContext(AuthContext);
-
+  const { userLogin, setUser,signInWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [error, setError] = useState({ login: " " });
+  const [error, setError] = useState("");
 
-  const navigate = useLocation();
-
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // Login part
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const form = e.target;
-    const email = form.email.value;
-    const password = form.password.value;
+    if (!email || !password) {
+      setError("Email and Password are required.");
+      return;
+    }
 
-    console.log(email, password);
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+
+    setError(""); // Clear any previous error
 
     userLogin(email, password)
       .then((result) => {
         const user = result.user;
         setUser(user);
-        console.log(user);
         Swal.fire({
           title: "Log in Successful!",
           text: "Welcome back to our platform!",
           icon: "success",
           confirmButtonText: "OK",
         });
-        navigate('/')
+        navigate(location?.state ? location.state : "/");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setError({ login: "Invalid email or password 🙃" });
-
-        // console.log(errorCode, errorMessage);
+        if (error.code) {
+          setError("Incorrect email or password. Please try again.");
+        }
       });
   };
 
-  // Passsword validition
-  {
-    user?.email ? <> </> : <>{}</>;
-  }
+  const handleGoogleSignIn = () => {
+    signInWithGoogle()
+      .then((result) => {
+        
+        console.log(result);
+          navigate("/"); 
+          Swal.fire({
+            title: "Login Successful!",
+            text: "Welcome to our platform!",
+            icon: "success", 
+            confirmButtonText: "OK",
+          });
+      
+      })
+      .catch((error) => {
+        console.log("ERROR", error.message);
+        
+      });
+  };
 
-  //   if (email ===  && password === "Password123") {
-
-  //   } else {
-  //     setError({ login: "Invalid email or password" });
-  //   }
-  // };
-
-  // handle log in
 
   const navigateToForgetPassword = () => {
-    Swal.fire({
-      icon: "info",
-      title: "Forgot Password",
-      text: "Reset password functionality can be added.",
+    navigate("/auth/forgetpassword", {
+      state: { email: email || "" },
     });
   };
 
-  const handleGoogleSignIn = () => {
-    alert("Google Sign-In clicked!");
-  };
-
   return (
-    <div className="flex min-h-screen items-center justify-center md:py-8 bg-gray-100">
-      <div className="w-11/12 max-w-md bg-white rounded-lg shadow-md p-6 border">
+    <div className="flex min-h-screen items-center justify-center md:py-8 ">
+      <div className="w-11/12 max-w-md bg-gray-100 rounded-lg shadow-md p-6 border">
         <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
           Login
         </h2>
@@ -125,25 +128,21 @@ const Login = () => {
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </span>
             </div>
-            {error.login && (
-              <p className="text-red-500 text-sm">{error.login}</p>
-            )}
           </div>
 
-          {/* Forgot Pass */}
-          <div className="text-right">
-            <Link to="/auth/forgetpassword">
-              <button
-                type="button"
-                onClick={navigateToForgetPassword}
-                className="text-sm text-blue-500 hover:underline"
-              >
-                Forgot Password?
-              </button>
-            </Link>
-          </div>
+          {/* Error Message */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
 
           {/* Submit btn */}
+          <div className="flex justify-end">
+            <button
+              type="button"
+              onClick={navigateToForgetPassword}
+              className="text-sm text-blue-500 hover:underline"
+            >
+              Forgot Password?
+            </button>
+          </div>
           <button
             type="submit"
             className="w-full py-2 px-4 bg-green-600 text-white font-medium rounded-md hover:bg-green-700"
