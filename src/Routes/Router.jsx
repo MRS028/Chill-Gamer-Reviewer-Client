@@ -7,6 +7,11 @@ import Register from "../AuthLaoyout/Register";
 import Login from "../AuthLaoyout/Login";
 import ErrorPage from "../LayOuts/ErrorPage";
 import ForgetPassword from "../AuthLaoyout/ForgetPassword";
+import AllReviews from "../Pages/AllReviews";
+import PrivateRoute from "./PrivateRoute";
+import AddReview from "../Pages/AddReview";
+import MyReviews from "../Pages/MyReviews";
+import GameWatchList from "../Pages/GameWatchList";
 
 const Router = createBrowserRouter([
   {
@@ -17,10 +22,27 @@ const Router = createBrowserRouter([
         path: "/",
         element: <Home></Home>,
       },
+      {
+        path: "/allreviews",
+        element: <AllReviews></AllReviews>,
+      },
+      {
+        path: "/addreview",
+        element: <PrivateRoute><AddReview></AddReview> </PrivateRoute>,
+      }, 
+      {
+        path: "/myreviews",
+        element: <PrivateRoute><MyReviews></MyReviews> </PrivateRoute>,
+      },
+      {
+        path: "/game-watchlist",
+        element: <PrivateRoute><GameWatchList></GameWatchList> </PrivateRoute>,
+      },
+
     ],
   },
   {
-    path: "/auth",
+    path: "/",
     element: <AuthLaoyout></AuthLaoyout>,
     children: [
         {

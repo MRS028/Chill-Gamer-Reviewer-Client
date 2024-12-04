@@ -3,25 +3,48 @@ import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import AuthProvider, { AuthContext } from "../Provider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
-  const {user} = useContext(AuthContext);
+  // Export from Authprovider
+  const { createNewUser ,user,setUser} = useContext(AuthContext);
+  
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
-console.log(user);
-  const handleSubmit = (e) => {
+  //  console.log(user);
 
+  // Form submit Section
+  const handleSubmit = (e) => {
     e.preventDefault();
     const form = new FormData(e.target);
     const name = form.get("name");
     const email = form.get("email");
     const photourl = form.get("photourl");
     const password = form.get("password");
-    const FormInfo = {name,email,photourl,password};
-
+    const FormInfo = { name, email, photourl, password };
 
     console.log(FormInfo);
-   
+    createNewUser(email, password)
+      .then((result) => {
+       
+        const user = result.user;
+        setUser(user);
+        console.log(user);
+        Swal.fire({
+          title: "Registration Successful!",
+          text: "Welcome to our platform!",
+          icon: "success", 
+          confirmButtonText: "OK",
+        });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(errorCode,errorMessage);
+      });
+
+    //  password check section
     if (!/[A-Z]/.test(password)) {
       setPasswordError("Password must contain at least one uppercase letter.");
       return;
@@ -35,9 +58,7 @@ console.log(user);
       return;
     }
 
-    setPasswordError(""); 
-   
-    
+    setPasswordError("");
   };
 
   const handleGoogleSignIn = () => {
@@ -53,8 +74,11 @@ console.log(user);
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name Field */}
           <div>
-            <label htmlFor="name" className="flex items-center text-sm font-medium text-gray-700">
-           Name
+            <label
+              htmlFor="name"
+              className="flex items-center text-sm font-medium text-gray-700"
+            >
+              Name
             </label>
             <input
               name="name"
@@ -68,8 +92,11 @@ console.log(user);
 
           {/* Email */}
           <div>
-            <label htmlFor="email" className="flex items-center text-sm font-medium text-gray-700">
-             Email
+            <label
+              htmlFor="email"
+              className="flex items-center text-sm font-medium text-gray-700"
+            >
+              Email
             </label>
             <input
               required
@@ -83,8 +110,11 @@ console.log(user);
 
           {/* Photo URL */}
           <div>
-            <label htmlFor="photo" className="flex items-center text-sm font-medium text-gray-700">
-               Photo URL
+            <label
+              htmlFor="photo"
+              className="flex items-center text-sm font-medium text-gray-700"
+            >
+              Photo URL
             </label>
             <input
               name="photourl"
@@ -97,8 +127,11 @@ console.log(user);
 
           {/* Password  */}
           <div>
-            <label htmlFor="password" className="flex items-center text-sm font-medium text-gray-700">
-               Password
+            <label
+              htmlFor="password"
+              className="flex items-center text-sm font-medium text-gray-700"
+            >
+              Password
             </label>
             <div className="relative">
               <input
@@ -130,7 +163,6 @@ console.log(user);
           </button>
         </form>
 
-        
         <div className="flex items-center justify-center space-x-2 mt-6">
           <span className="block w-20 border-t border-gray-300"></span>
           <span className="text-sm text-gray-500">Or Register with</span>
@@ -143,7 +175,6 @@ console.log(user);
           <FcGoogle className="mr-2" /> Register with Google
         </button>
 
-       
         <p className="text-sm text-center text-gray-500 mt-6">
           Already have an account?{" "}
           <Link to="/auth/login" className="text-blue-500 hover:underline">

@@ -1,19 +1,28 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FaHome, FaTags } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const Navbar = () => {
+  const {user,logOut} = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+// console.log(user.email);
+
+
+
+
+
+
 
   const links = (
     <>
       <NavLink to="/" className="text-black">
         Home
       </NavLink>
-      <NavLink className="text-black"> All Reviews</NavLink>
-      <NavLink className="text-black">Add Review</NavLink>
-      <NavLink className="text-black">My Reviews</NavLink>
-      <NavLink className="text-black">Game Watchlist</NavLink>
+      <NavLink to="/allreviews" className="text-black"> All Reviews</NavLink>
+      <NavLink to="/addreview" className="text-black">Add Review</NavLink>
+      <NavLink to="/myreviews" className="text-black">My Reviews</NavLink>
+      <NavLink to="/game-watchlist" className="text-black">Game Watchlist</NavLink>
     </>
   );
 
@@ -53,7 +62,9 @@ const Navbar = () => {
 
           {/* Login/Register Buttons (Desktop) */}
           <div className="hidden md:block">
-            <Link to="/auth/login">
+            {
+              (user || user?.email) ? <button onClick={logOut} className="btn ">Logout</button> : <>
+              <Link to="/auth/login">
               <button className="bg-blue-400 text-gray-900 px-4 py-2 rounded hover:bg-blue-500">
                 Login{" "}
               </button>{" "}
@@ -64,6 +75,8 @@ const Navbar = () => {
                 Register
               </button>{" "}
             </Link>
+              </>
+            }
           </div>
         </div>
 
@@ -72,6 +85,8 @@ const Navbar = () => {
           <div id="mobile-menu" className="bg-gray-500 p-5 md:hidden space-x-4">
             {links}
             <div className="flex justify-center mt-2">
+            {
+              (user || user?.email) ? <button onClick={logOut} className="btn ">Logout</button> : <>
               <Link to="/auth/login">
                 <button className="bg-blue-400 text-gray-900 px-4 py-2 rounded hover:bg-blue-500">
                   Login
@@ -83,6 +98,8 @@ const Navbar = () => {
                 Register
               </button>{" "}
             </Link>
+              </>
+            }
             </div>
           </div>
         )}
