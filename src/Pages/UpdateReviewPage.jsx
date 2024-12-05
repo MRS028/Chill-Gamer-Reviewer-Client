@@ -1,100 +1,82 @@
-import React, { useContext, useState } from "react";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { AuthContext } from "../Provider/AuthProvider";
 
-const AddReview = () => {
-  const { user } = useContext(AuthContext);
+const UpdateReviewPage = () => {
+  // Use the loader data to pre-fill the form
+  const reviewData = useLoaderData();
   const [formData, setFormData] = useState({
-    gameCover: "",
-    gameTitle: "",
-    reviewDescription: "",
-    rating: "",
-    publishingYear: "",
-    genre: "",
+    gameCover: reviewData.gameCover,
+    gameTitle: reviewData.gameTitle,
+    publishingYear: reviewData.publishingYear,
+    reviewDescription: reviewData.reviewDescription,
+    rating: reviewData.rating,
+    genre: reviewData.genre,
   });
 
-  const userEmail = user?.email;
-  const userName = user?.displayName;
+  const navigate = useNavigate();
+
+  const [userEmail, setUserEmail] = useState(reviewData.userEmail);
+  const [userName, setUserName] = useState(reviewData.userName);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+
+    // Update userEmail and userName if they are being changed
+    if (name === "userEmail") {
+      setUserEmail(value);
+    }
+    if (name === "userName") {
+      setUserName(value);
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const {
-      gameCover,
-      gameTitle,
-      publishingYear,
-      reviewDescription,
-      rating,
-      genre,
-    } = formData;
+    const reviewId = reviewData._id;
 
-    const newReview = {
-      gameCover,
-      gameTitle,
-      publishingYear,
-      userEmail,
-      reviewDescription,
-      rating,
-      genre,
-      userName,
-    };
-
-    // console.log(newReview);
-
-
-    fetch("http://localhost:5000/allreviews",{
-        method: 'POST',
-        headers : {
-            'content-type' : 'application/json'
-        },
-        body: JSON.stringify(newReview)
+    // send data to the server
+    fetch(`http://localhost:5000/allReviews/${reviewId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     })
-    .then(res=> res.json())
-    .then(data=>{
-        if(data.insertedId){
-            Swal.fire({
-                title: "Success!",
-                text: "Your review has been submitted successfully.",
-                icon: "success",
-                confirmButtonText: "OK",
-              });
-
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.modifiedCount) {
+          Swal.fire({
+            title: "Review Updated Successfully!",
+            text: "Welcome back to our platform!",
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+          navigate('/')
         }
-        // console.log(data);
-    })
-
-    
-
-    setFormData({
-      gameCover: "",
-      gameTitle: "",
-      reviewDescription: "",
-      rating: "",
-      publishingYear: "",
-      genre: "",
-    });
+      })
+      .catch((error) => {
+        console.log(error)
+        Swal.fire({
+          title: "Error",
+          text: "Something went wrong. Please try again.",
+          icon: "error",
+        });
+      });
   };
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-base-100 shadow-md border rounded-md mt-10 mb-12">
       <h1 className="text-3xl font-bold mb-6 text-base-content text-center">
-        Add New Review
+        Update Review
       </h1>
-      <form
-        onSubmit={handleSubmit}
-        className="grid grid-cols-1 md:grid-cols-2 gap-6"
-      >
+      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Left Column */}
         <div className="space-y-4 font-semibold text-xl text-base-content">
           <div>
             <label className="label">
-              <span className="label-text text-base-content">
-                Game Cover URL
-              </span>
+              <span className="label-text text-base-content">Game Cover URL</span>
             </label>
             <input
               name="gameCover"
@@ -123,9 +105,7 @@ const AddReview = () => {
 
           <div>
             <label className="label">
-              <span className="label-text text-base-content">
-                Publishing Year
-              </span>
+              <span className="label-text text-base-content">Publishing Year</span>
             </label>
             <input
               type="number"
@@ -144,9 +124,11 @@ const AddReview = () => {
             </label>
             <input
               type="email"
+              name="userEmail"
               value={userEmail}
+              onChange={handleChange}
+              className="input input-bordered w-full h-12 bg-base-200 text-base-content"
               readOnly
-              className="input input-bordered w-full h-12 bg-base-200 text-base-content "
             />
           </div>
         </div>
@@ -155,9 +137,7 @@ const AddReview = () => {
         <div className="space-y-4 font-semibold text-xl text-base-content">
           <div>
             <label className="label">
-              <span className="label-text text-base-content">
-                Review Description
-              </span>
+              <span className="label-text text-base-content">Review Description</span>
             </label>
             <textarea
               name="reviewDescription"
@@ -214,10 +194,11 @@ const AddReview = () => {
             </label>
             <input
               type="text"
-              name="name"
+              name="userName"
               value={userName}
-              readOnly
+              onChange={handleChange}
               className="input input-bordered w-full h-12 bg-base-200 text-base-content"
+              readOnly
             />
           </div>
         </div>
@@ -228,7 +209,7 @@ const AddReview = () => {
             type="submit"
             className="btn bg-[#30beba] text-white font-semibold hover:bg-green-500 w-full h-12"
           >
-            Submit Review
+            Update Review
           </button>
         </div>
       </form>
@@ -236,4 +217,4 @@ const AddReview = () => {
   );
 };
 
-export default AddReview;
+export default UpdateReviewPage; 

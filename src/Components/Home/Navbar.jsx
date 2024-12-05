@@ -44,7 +44,7 @@ const Navbar = () => {
       <NavLink to="/" className="text-[#30beba]  hover:text-green-600">
         Home
       </NavLink>
-      <NavLink to="/allreviews" className="text-[#30beba] hover:text-green-600">
+      <NavLink to="/reviews" className="text-[#30beba] hover:text-green-600">
         {" "}
         All Reviews
       </NavLink>
@@ -55,7 +55,7 @@ const Navbar = () => {
         My Reviews
       </NavLink>
       <NavLink
-        to="/game-watchlist"
+        to="/myWatchlist"
         className="text-[#30beba] hover:text-green-600"
       >
         Game Watchlist
