@@ -7,13 +7,14 @@ import Swal from "sweetalert2";
 
 const Register = () => {
   // Export from Authprovider
-  const { createNewUser ,user,setUser,signInWithGoogle} = useContext(AuthContext);
+  const { createNewUser, user, setUser,updateUserProfile, signInWithGoogle } =
+    useContext(AuthContext);
 
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
   //  console.log(user);
- const navigate = useNavigate();
- const location =useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
   // Form submit Section
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -30,11 +31,18 @@ const Register = () => {
         navigate("/");
         const user = result.user;
         setUser(user);
-        console.log(user);
+        // console.log(user);
+        updateUserProfile({ displayName: name, photoURL: photourl })
+        .then(result=>{
+          navigate('/')
+        })
+        .catch(error=>{
+          console.log(error);
+        })
         Swal.fire({
           title: "Registration Successful!",
           text: "Welcome to our platform!",
-          icon: "success", 
+          icon: "success",
           confirmButtonText: "OK",
         });
       })
@@ -42,7 +50,7 @@ const Register = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        console.log(errorCode,errorMessage);
+        console.log(errorCode, errorMessage);
       });
 
     //  password check section
@@ -65,27 +73,24 @@ const Register = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
-        
-        console.log(result);
-          navigate("/"); 
-          Swal.fire({
-            title: "Registration Successful!",
-            text: "Welcome to our platform!",
-            icon: "success", 
-            confirmButtonText: "OK",
-          });
-      
+        console.log(result?.user?.name);
+        navigate("/");
+        Swal.fire({
+          title: "Registration Successful!",
+          text: "Welcome to our platform!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
       })
       .catch((error) => {
         console.log("ERROR", error.message);
-        
       });
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center md:my-8">
-      <div className="w-11/12 max-w-md bg-gray-100 rounded-lg shadow-md p-6 border">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+    <div className="flex min-h-screen items-center justify-center md:my-8 text-base-content">
+      <div className="w-11/12 max-w-md bg-base-200 rounded-lg shadow-md p-6 border">
+        <h2 className="text-2xl font-semibold text-center text-base-content mb-6">
           Register
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -93,7 +98,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="name"
-              className="flex items-center text-sm font-medium text-gray-700"
+              className="flex items-center text-sm font-medium text-base-content"
             >
               Name
             </label>
@@ -111,7 +116,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="email"
-              className="flex items-center text-sm font-medium text-gray-700"
+              className="flex items-center text-sm font-medium text-base-content"
             >
               Email
             </label>
@@ -129,7 +134,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="photo"
-              className="flex items-center text-sm font-medium text-gray-700"
+              className="flex items-center text-sm font-medium text-base-content"
             >
               Photo URL
             </label>
@@ -146,7 +151,7 @@ const Register = () => {
           <div>
             <label
               htmlFor="password"
-              className="flex items-center text-sm font-medium text-gray-700"
+              className="flex items-center text-sm font-medium text-base-content"
             >
               Password
             </label>
@@ -174,7 +179,7 @@ const Register = () => {
           {/* Submit btn */}
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-green-600 text-white font-medium rounded-md hover:bg-green-700"
+            className="w-full py-2 px-4 bg-[#30beba] text-white font-medium rounded-md hover:bg-green-700"
           >
             Register
           </button>

@@ -54,7 +54,7 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         
-        console.log(result);
+        console.log(result?.name);
           navigate("/"); 
           Swal.fire({
             title: "Login Successful!",
@@ -78,9 +78,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center md:py-8 ">
-      <div className="w-11/12 max-w-md bg-gray-100 rounded-lg shadow-md p-6 border">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+    <div className="flex min-h-screen items-center justify-center md:py-8 text-base-content ">
+      <div className="w-11/12 max-w-md bg-base-200 rounded-lg shadow-md p-6 border">
+        <h2 className="text-2xl font-semibold text-center text-base-content mb-6">
           Login
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -88,7 +88,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="email"
-              className="flex items-center text-sm font-medium text-gray-700"
+              className="flex items-center text-sm font-medium text-base-content"
             >
               Email
             </label>
@@ -107,7 +107,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="password"
-              className="flex items-center text-sm font-medium text-gray-700"
+              className="flex items-center text-sm font-medium text-base-content"
             >
               Password
             </label>
@@ -145,7 +145,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-2 px-4 bg-green-600 text-white font-medium rounded-md hover:bg-green-700"
+            className="w-full py-2 px-4 bg-[#30beba] text-white font-medium rounded-md hover:bg-green-700"
           >
             Login
           </button>
