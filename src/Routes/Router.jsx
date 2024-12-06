@@ -27,60 +27,77 @@ const Router = createBrowserRouter([
       {
         path: "/reviews",
         element: <AllReviews></AllReviews>,
-        loader: ()=> fetch('http://localhost:5000/allReviews')
+        loader: () => fetch("http://localhost:5000/allReviews"),
       },
       {
         path: "/addReview",
-        element: <PrivateRoute><AddReview></AddReview> </PrivateRoute>,
-      }, 
-      {
-        path: "/myreviews",
-        element: <PrivateRoute><MyReviews></MyReviews> </PrivateRoute>,
-
+        element: (
+          <PrivateRoute>
+            <AddReview></AddReview>{" "}
+          </PrivateRoute>
+        ),
       },
       {
-        path: '/review/:id',
-        element: <PrivateRoute><ReviewDetails /></PrivateRoute> ,
-        loader: ({ params }) => fetch(`http://localhost:5000/allReviews/${params.id}`).then(res => res.json())
-      }
-      // 
-      ,
+        path: "/myreviews",
+        element: (
+          <PrivateRoute>
+            <MyReviews></MyReviews>{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/review/:id",
+        element: (
+          <PrivateRoute>
+            <ReviewDetails />
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allReviews/${params.id}`).then((res) =>
+            res.json()
+          ),
+      },
+      //
       {
         path: "/myWatchlist",
-        element: <PrivateRoute><MyWatchlist></MyWatchlist> </PrivateRoute>,
-      },{
-        path: '/review/updateReview/:id',
+        element: (
+          <PrivateRoute>
+            <MyWatchlist></MyWatchlist>{" "}
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/review/updateReview/:id",
         element: <UpdateReviewPage></UpdateReviewPage>,
-        loader: ({ params }) => fetch(`http://localhost:5000/allReviews/${params.id}`).then(res => res.json())
-      }
-
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/allReviews/${params.id}`).then((res) =>
+            res.json()
+          ),
+      },
     ],
   },
   {
     path: "/",
     element: <AuthLaoyout></AuthLaoyout>,
     children: [
-        {
-            path: "/auth/register",
-            element: <Register></Register>,
-          },
-          {
-            path: "/auth/login",
-            element: <Login></Login>,
-          },
-          {
-            path: "/auth/forgetpassword",
-            element: <ForgetPassword></ForgetPassword>,
-
-          }
-
-    ]
+      {
+        path: "/auth/register",
+        element: <Register></Register>,
+      },
+      {
+        path: "/auth/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/auth/forgetpassword",
+        element: <ForgetPassword></ForgetPassword>,
+      },
+    ],
   },
   {
-    path: '/*',
-    element: <ErrorPage></ErrorPage>
-  }
-  
+    path: "/*",
+    element: <ErrorPage></ErrorPage>,
+  },
 ]);
 
 export default Router;

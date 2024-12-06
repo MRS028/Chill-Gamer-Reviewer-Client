@@ -14,12 +14,15 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+ 
 
+  // console.log(location)
   // Login part
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!email || !password) {
+     
       setError("Email and Password are required.");
       return;
     }
@@ -29,7 +32,7 @@ const Login = () => {
       return;
     }
 
-    setError(""); // Clear any previous error
+    setError(""); 
 
     userLogin(email, password)
       .then((result) => {
@@ -37,7 +40,7 @@ const Login = () => {
         setUser(user);
         Swal.fire({
           title: "Log in Successful!",
-          text: "Welcome back to our platform!",
+          text: "Welcome back to Chill Gamer!",
           icon: "success",
           confirmButtonText: "OK",
         });
@@ -45,6 +48,13 @@ const Login = () => {
       })
       .catch((error) => {
         if (error.code) {
+          Swal.fire({
+            icon: "warning",
+            title: "Incorrect email or Password",
+            text: "The password you entered is incorrect. Please try again.",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#f59e0b", // Amber color
+          });
           setError("Incorrect email or password. Please try again.");
         }
       });
@@ -55,16 +65,23 @@ const Login = () => {
       .then((result) => {
         
         console.log(result?.name);
-          navigate("/"); 
+        navigate(location?.state ? location.state : "/"); 
           Swal.fire({
             title: "Login Successful!",
-            text: "Welcome to our platform!",
+            text: "Welcome to Chill Gamer!",
             icon: "success", 
             confirmButtonText: "OK",
           });
       
       })
       .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: "Invalid email or password. Please try again.",
+          confirmButtonText: "Retry",
+          confirmButtonColor: "#d33",
+        });
         console.log("ERROR", error.message);
         
       });

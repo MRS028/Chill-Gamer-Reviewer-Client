@@ -3,6 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { FaTrashAlt } from "react-icons/fa"; // Import React Icons
 import Loading from "./Loading";
 import Swal from "sweetalert2";
+import { Fade } from "react-awesome-reveal";
 
 const MyWatchlist = () => {
   const [watchlist, setWatchlist] = useState([]); // All watchlist items
@@ -70,9 +71,11 @@ const MyWatchlist = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
+      <Fade direction="left" duration={1000} delay={500}>
       <h1 className="text-3xl font-bold text-center mb-8 text-base-content">
         My Watchlist
       </h1>
+      </Fade>
       {loading ? (
         <Loading />
       ) : (

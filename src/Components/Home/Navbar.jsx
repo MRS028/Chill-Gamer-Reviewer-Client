@@ -98,7 +98,7 @@ const Navbar = () => {
             {user && user?.email ? (
               <>
                 <div
-                  className="tooltip tooltip-bottom pr-3 text-white font-semibold"
+                  className="tooltip tooltip-bottom pr-3 text-base-content font-semibold"
                   data-tip={user.displayName || "Anonymous User"}
                 >
                   <img
@@ -109,7 +109,7 @@ const Navbar = () => {
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="btn bg-red-500 hover:bg-red-700 font-semibold text-white "
+                  className="btn bg-red-500 hover:bg-red-700 font-semibold text-base-content "
                 >
                   Log out <IoIosLogOut size={18} />
                 </button>
@@ -138,7 +138,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             {user && user?.email ? (
               <div
-                className="tooltip tooltip-bottom pr-3 text-white font-semibold"
+                className="tooltip tooltip-bottom pr-3 text-base-content font-semibold"
                 data-tip={user?.displayName || "Anonymous User"}
               >
                 <img
@@ -174,14 +174,14 @@ const Navbar = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 z-50">
+          <div className="fixed inset-0 bg-base-200 bg-opacity-50 z-50">
             <div className="flex justify-end p-6">
               <button
                 onClick={() => setIsMenuOpen(false)}
                 className="text-white text-3xl "
               >
                 <svg
-                  className="w-10 h-12 text-red-600 font-bold"
+                  className="w-10 h-12 text-red-600 bg-base-200 font-bold"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
@@ -196,7 +196,7 @@ const Navbar = () => {
                 </svg>
               </button>
             </div>
-            <div className="flex flex-col md:grid grid-cols-2 items-center justify-center h-[70%] bg-gray-100 text-lg space-y-8">
+            <div className="flex flex-col md:grid grid-cols-2 items-center justify-center h-[70%] bg-base-100 text-lg space-y-8">
               {links}
               <div className="mt-4">
                 {user && user?.email ? (

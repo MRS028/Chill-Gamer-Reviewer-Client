@@ -12,6 +12,7 @@ const UpdateReviewPage = () => {
     reviewDescription: reviewData.reviewDescription,
     rating: reviewData.rating,
     genre: reviewData.genre,
+    
   });
 
   const navigate = useNavigate();
@@ -182,6 +183,7 @@ const UpdateReviewPage = () => {
               </option>
               <option value="Action">Action</option>
               <option value="RPG">RPG</option>
+              <option value="race">Race</option>
               <option value="Adventure">Adventure</option>
               <option value="Sci-Fi">Sci-Fi</option>
               <option value="E-Sports">E-Sports</option>
