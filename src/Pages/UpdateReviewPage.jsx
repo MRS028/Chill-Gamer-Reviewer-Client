@@ -38,7 +38,7 @@ const UpdateReviewPage = () => {
     const reviewId = reviewData._id;
 
     // send data to the server
-    fetch(`http://localhost:5000/allReviews/${reviewId}`, {
+    fetch(`https://chill-gamer-server-sigma.vercel.app/allReviews/${reviewId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -50,7 +50,7 @@ const UpdateReviewPage = () => {
         if (data.modifiedCount) {
           Swal.fire({
             title: "Review Updated Successfully!",
-            text: "Welcome back to our platform!",
+            text: "Thank you for your contribution!",
             icon: "success",
             confirmButtonText: "OK",
           });

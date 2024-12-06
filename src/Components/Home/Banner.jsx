@@ -14,22 +14,22 @@ const GamingBannerSlider = () => {
   const slides = [
     {
       image: banner4,
-      title: "Top 10 Gaming Consoles of 2024",
+      title: "Top 10 Gaming Consoles of 2024...",
       description: "Discover the best gaming consoles that rule the gaming world today.",
     },
     {
       image: banner5,
-      title: "5 Upcoming RPGs You Can't Miss",
+      title: "5 Upcoming RPGs You Can't Miss...",
       description: "Explore the most anticipated role-playing games set to release soon.",
     },
     {
       image: banner6,
-      title: "Mastering Esports Tournaments",
+      title: "Mastering Esports Tournaments...",
       description: "Learn how to compete and excel in global esports competitions.",
     },
     {
       image: banner7,
-      title: "Gaming Tips for Beginners",
+      title: "Gaming Tips for Beginners...",
       description: "Get started with essential tips for your gaming journey.",
     },
   ];
@@ -39,7 +39,7 @@ const GamingBannerSlider = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
-    }, 5000); // Change slide every 5 seconds
+    }, 6000); 
     return () => clearInterval(timer);
   }, [slides.length]);
 
@@ -63,22 +63,24 @@ const GamingBannerSlider = () => {
       </div>
       {/* Slide Content */}
       <div className="absolute inset-0 mx-2 bg-opacity-50 text-white flex flex-col justify-center items-start p-8 lg:p-16">
-        <h2 className="text-4xl font-bold mb-4 text-[#30beba]">{} <Typewriter
+        <h2 className="text-4xl font-bold mb-4 text-[#30be91]"> <Typewriter
                 words={[slides[currentIndex].title]} 
-                loop={10} 
+                loop={100} 
                 cursor
                 cursorStyle="|"
                 typeSpeed={50}
                 deleteSpeed={25}
               /></h2>
         <p className="text-xl">{slides[currentIndex].description}</p>
-        <Link  to='/reviews' className="lg:mx-44 mx-32 my-5"><button className="btn  bg-[#30beba] text-white">View More</button> </Link>
+        <Link  to='/reviews' className="lg:mx-44 flex justify-center my-5">
+        {/* <button className="btn border-none  bg-[#30beba] text-white">View More</button>  */}
+        </Link>
       </div>
       {/* Navigation Buttons */}
-      <div className="absolute top-1/2 transform -translate-y-1/2 left-5 cursor-pointer text-base-content text-4xl">
+      <div className="absolute top-1/2 transform -translate-y-1/2 left-5 cursor-pointer hidden text-base-content text-4xl">
         <BsArrowLeftCircleFill onClick={handlePrev} />
       </div>
-      <div className="absolute top-1/2 transform -translate-y-1/2 right-5 cursor-pointer text-base-content text-4xl">
+      <div className="absolute top-1/2 transform -translate-y-1/2 right-5 cursor-pointer hidden text-base-content text-4xl">
         <BsArrowRightCircleFill onClick={handleNext} />
       </div>
       {/* Dots Indicator */}

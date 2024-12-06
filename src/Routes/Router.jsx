@@ -27,7 +27,7 @@ const Router = createBrowserRouter([
       {
         path: "/reviews",
         element: <AllReviews></AllReviews>,
-        loader: () => fetch("http://localhost:5000/allReviews"),
+        loader: () => fetch("https://chill-gamer-server-sigma.vercel.app/allReviews"),
       },
       {
         path: "/addReview",
@@ -53,7 +53,7 @@ const Router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allReviews/${params.id}`).then((res) =>
+          fetch(`https://chill-gamer-server-sigma.vercel.app/allReviews/${params.id}`).then((res) =>
             res.json()
           ),
       },
@@ -70,7 +70,7 @@ const Router = createBrowserRouter([
         path: "/review/updateReview/:id",
         element: <UpdateReviewPage></UpdateReviewPage>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/allReviews/${params.id}`).then((res) =>
+          fetch(`https://chill-gamer-server-sigma.vercel.app/allReviews/${params.id}`).then((res) =>
             res.json()
           ),
       },

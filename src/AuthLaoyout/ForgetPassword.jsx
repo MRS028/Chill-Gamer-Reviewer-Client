@@ -10,7 +10,7 @@ const ForgetPassword = () => {
   const location = useLocation();
   const [email, setEmail] = useState(location.state?.email || ""); 
   useEffect(() => {
-    console.log("Location State:", location.state);
+    // console.log("Location State:", location.state);
   }, [location.state]);
   
   const handleResetPassword = (e) => {

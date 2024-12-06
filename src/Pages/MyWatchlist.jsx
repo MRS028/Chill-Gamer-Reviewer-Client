@@ -19,7 +19,7 @@ const MyWatchlist = () => {
 
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/watchlist");
+        const response = await fetch("https://chill-gamer-server-sigma.vercel.app/watchlist");
         const data = await response.json();
         setWatchlist(data); // Store all watchlist data
         setLoading(false);
@@ -54,7 +54,7 @@ const MyWatchlist = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/watchlist/${id}`, {
+        fetch(`https://chill-gamer-server-sigma.vercel.app/watchlist/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

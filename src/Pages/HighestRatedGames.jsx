@@ -8,11 +8,10 @@ const HighestRatedGames = () => {
   const [highestRatedGames, setHighestRatedGames] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch highest-rated games from the server
   useEffect(() => {
     const fetchHighestRatedGames = async () => {
       try {
-        const response = await fetch("http://localhost:5000/highestRatedGames");
+        const response = await fetch("https://chill-gamer-server-sigma.vercel.app/highestRatedGames");
         const data = await response.json();
         setHighestRatedGames(data);
         setLoading(false);
@@ -40,13 +39,15 @@ const HighestRatedGames = () => {
         {highestRatedGames.map((game) => (
           <div
             key={game._id}
-            className="border border-base-200 shadow-lg rounded-lg p-6 bg-base-200"
+            className="border border-base-200 p-4 shadow-lg rounded-lg  bg-base-200"
           >
+           
             <img
               src={game.gameCover}
               alt={game.gameTitle}
-              className="w-full h-40 object-cover rounded-md mb-4"
+              className="w-full h-48 object-cover rounded-md mb-4"
             />
+           
             <h3 className="text-lg font-bold text-base-content">
              
               <Typewriter
@@ -63,7 +64,7 @@ const HighestRatedGames = () => {
               <strong className="opacity-80">Rating:</strong > <span className="text-yellow-500 font-bold">{game.rating.toFixed(1)}/10</span>
             </p>
             <p className="mt-4 text-base-content opacity-85">
-              {game.reviewDescription.slice(0, 100)}...
+              {game.reviewDescription.slice(0, 110)}...
             </p>
             <Link to={`/review/${game._id}`}>
               <button className="btn bg-[#30beba] text-white hover:bg-green-500 mt-4">

@@ -1,4 +1,5 @@
 import React from "react";
+import logo from "../../assets/logo1.png";
 import {
   FaFacebookF,
   FaTwitter,
@@ -6,13 +7,12 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Typewriter } from "react-simple-typewriter";
 
 const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
-      behavior: 'smooth', // smooth scroll
+      behavior: 'smooth', 
     });
   };
   
@@ -20,15 +20,8 @@ const Footer = () => {
     <footer className="bg-gray-800 text-gray-200">
       <div className="container mx-auto py-8 px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         <div>
-          <Link onClick={scrollToTop} to='/'><h2 className="text-lg font-bold text-[#30beba] mb-4">
-            <Typewriter
-              words={["🎮 Chill Gamer"]}
-              loop={10}
-              cursor
-              cursorStyle="|"
-              typeSpeed={50}
-              deleteSpeed={25}
-            />
+          <Link onClick={scrollToTop} to='/'><h2 className="text-lg font-bold text-[#30beba] mb-4"><img className="w-12  rounded-full inline-block" src={logo} alt="" />Chill Gamer
+           
           </h2></Link>
           <p className="text-sm text-gray-400">
             Discover and review your favorite games on Chill Gamer. Stay updated
@@ -38,15 +31,8 @@ const Footer = () => {
         </div>
 
         <div className="">
-          <h2 className="text-lg font-bold text-[#30beba] mb-4">
-            <Typewriter
-              words={["  Quick Links"]} 
-              loop={10} 
-              cursor
-              cursorStyle="|"
-              typeSpeed={40} 
-              deleteSpeed={25}
-            />
+          <h2 className="text-lg font-bold text-[#30beba] mb-4"> Quick Links
+            
           </h2>
           <ul className="space-y-2">
             <li>
@@ -55,33 +41,26 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to="/allreviews" className="hover:text-blue-400">
+              <Link to="/reviews" className="hover:text-blue-400">
                 All Reviews
               </Link>
             </li>
             <li>
-              <Link to="/addreview" className="hover:text-blue-400">
+              <Link to="/addReview" className="hover:text-blue-400">
                 Add Review
               </Link>
             </li>
             <li>
-              <Link to="/game-watchlist" className="hover:text-blue-400">
-                Game Watchlist
+              <Link to="/mywatchlist" className="hover:text-blue-400">
+                My Watchlist
               </Link>
             </li>
           </ul>
         </div>
 
         <div>
-          <h2 className="text-lg font-bold text-[#30beba] mb-4">
-          <Typewriter
-              words={["Follow Us"]} 
-              loop={10} 
-              cursor
-              cursorStyle="|"
-              typeSpeed={40} 
-              deleteSpeed={25}
-            />
+          <h2 className="text-lg font-bold text-[#30beba] mb-4">Follow Us
+      
 
           </h2>
           <p className="text-sm text-gray-400 mb-4">

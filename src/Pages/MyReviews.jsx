@@ -20,7 +20,7 @@ const MyReviews = ({ userEmail }) => {
     const fetchAllReviews = async () => {
       try {
         setLoading(true);
-        const response = await fetch("http://localhost:5000/allReviews");
+        const response = await fetch("https://chill-gamer-server-sigma.vercel.app/allReviews");
         const data = await response.json();
         setReviews(data);
         setLoading(false);
@@ -55,7 +55,7 @@ const MyReviews = ({ userEmail }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/allReviews/${id}`, {
+        fetch(`https://chill-gamer-server-sigma.vercel.app/allReviews/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

@@ -10,12 +10,12 @@ const ReviewCard = ({ review }) => {
     review;
 
   return (
-    <div className="relative group bg-gradient-to-br from-gray-100 to-gray-300 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300">
-    <div className="relative overflow-hidden">
+    <div className="relative group bg-gradient-to-br from-gray-100 to-gray-300 transition-transform duration-500 group-hover:scale-110 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer">
+    <div className="relative w-[430px] h-56 overflow-hidden">
       <img
         src={gameCover}
         alt={gameTitle}
-        className="w-full h-56 object-cover rounded-t-2xl transition-transform duration-500 group-hover:scale-110"
+        className="w-full h-full object-cover rounded-t-2xl "
       />
       
       <span className="absolute top-4 left-4 bg-green-500 text-white text-xs px-3 py-1 rounded-full uppercase font-bold shadow-md">

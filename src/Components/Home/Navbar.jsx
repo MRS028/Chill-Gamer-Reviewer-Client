@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { IoIosLogIn, IoIosLogOut } from "react-icons/io";
 import { FaUserPlus } from "react-icons/fa6";
 import Swal from "sweetalert2";
+import logo from "../../assets/logo1.png";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -24,8 +24,8 @@ const Navbar = () => {
       cancelButtonText: "Cancel",
       reverseButtons: true,
       customClass: {
-        confirmButton: "bg-red-600 text-white hover:bg-red-700", // Confirm button custom class
-        cancelButton: "bg-gray-400 text-white hover:bg-gray-500", // Cancel button custom class
+        confirmButton: "bg-red-600 text-white hover:bg-red-700", 
+        cancelButton: "bg-gray-400 text-white hover:bg-gray-500", 
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -87,8 +87,8 @@ const Navbar = () => {
       <nav className="shadow-lg  text-gray-200 ">
         <div className="container mx-auto flex items-center justify-between py-4 px-6">
           {/* Logo */}
-          <h1 className="text-2xl font-bold text-[#30beba] hover:text-green-600">
-            🎮 Chill Gamer
+          <h1 className="text-xl md:text-2xl font-bold text-[#30beba] hover:text-green-600">
+            <img className="w-14  rounded-full inline-block" src={logo} alt="" /> Chill Gamer
           </h1>
 
           {/* Desktop Menu */}
@@ -134,7 +134,7 @@ const Navbar = () => {
             )}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* mobile menu button */}
           <div className="lg:hidden">
             {user && user?.email ? (
               <div
@@ -152,14 +152,14 @@ const Navbar = () => {
             )}
             <button
               id="menu-button"
-              className="text-gray-900"
+              className="text-base-content"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="inline-block h-5 w-5 stroke-current"
+                className="inline-block h-8 w-8 stroke-current"
               >
                 <path
                   strokeLinecap="round"
@@ -172,7 +172,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* mobile section */}
         {isMenuOpen && (
           <div className="fixed inset-0 bg-base-200 bg-opacity-50 z-50">
             <div className="flex justify-end p-6">
@@ -196,13 +196,14 @@ const Navbar = () => {
                 </svg>
               </button>
             </div>
-            <div className="flex flex-col md:grid grid-cols-2 items-center justify-center h-[70%] bg-base-100 text-lg space-y-8">
+            {/* flip navbar */}
+            <div className="flex flex-col md:grid w-[80%] grid-cols-2 mx-auto items-center rounded-lg overflow-hidden justify-center h-[60%] bg-base-100 text-lg space-y-4">
               {links}
               <div className="mt-4">
                 {user && user?.email ? (
                   <button
                     onClick={handleLogout}
-                    className="btn bg-red-500 dark:text-white py-3 px-6 rounded-md hover:bg-red-700"
+                    className="btn bg-red-500  dark:text-white py-3 px-6 rounded-md hover:bg-red-700"
                   >
                     Logout <IoIosLogOut size={18} />
                   </button>

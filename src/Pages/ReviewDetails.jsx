@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 
 const ReviewDetails = () => {
   useEffect(() => {
-    document.title = "Add Review | Chill Gamer";
+    document.title = "Review Details | Chill Gamer";
   }, [])
   const review = useLoaderData(); 
   const { user } = useContext(AuthContext); 
@@ -29,7 +29,7 @@ const ReviewDetails = () => {
         userName,
       };
     try {
-      const response = await fetch("http://localhost:5000/watchlist", {
+      const response = await fetch("https://chill-gamer-server-sigma.vercel.app/watchlist", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,7 +71,7 @@ const ReviewDetails = () => {
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-10">
-  <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">
+  <h1 className="text-4xl font-extrabold text-center mb-8 text-base-content">
     Review Details
   </h1>
   {review ? (

@@ -4,6 +4,9 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
+import "react-toastify/dist/ReactToastify.css";
+import { toast, ToastContainer } from "react-toastify";
+
 
 const Login = () => {
   useEffect(() => {
@@ -67,14 +70,28 @@ const Login = () => {
     signInWithGoogle()
       .then((result) => {
         
-        console.log(result?.name);
+        // console.log(result?.name);
         navigate(location?.state ? location.state : "/"); 
-          Swal.fire({
-            title: "Login Successful!",
-            text: "Welcome to Chill Gamer!",
-            icon: "success", 
-            confirmButtonText: "OK",
-          });
+        // toast.success("Log in successfull");
+
+        Swal.fire({
+          title: "Login Successful!",
+          text: "Welcome back to Chill Gamer!",
+          icon: "success", 
+          showConfirmButton: false, 
+          timer: 1000, 
+          timerProgressBar: true, 
+        });
+
+
+
+
+          // Swal.fire({
+          //   title: "Login Successful!",
+          //   text: "Welcome to Chill Gamer!",
+          //   icon: "success", 
+          //   confirmButtonText: "OK",
+          // });
       
       })
       .catch((error) => {
@@ -85,7 +102,7 @@ const Login = () => {
           confirmButtonText: "Retry",
           confirmButtonColor: "#d33",
         });
-        console.log("ERROR", error.message);
+        // console.log("ERROR", error.message);
         
       });
   };
@@ -192,6 +209,18 @@ const Login = () => {
           </Link>
         </p>
       </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
     </div>
   );
 };

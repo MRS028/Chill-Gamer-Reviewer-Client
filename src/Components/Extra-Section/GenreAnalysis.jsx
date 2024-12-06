@@ -10,7 +10,7 @@ const GenreAnalysis = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("http://localhost:5000/allReviews");
+        const response = await fetch("https://chill-gamer-server-sigma.vercel.app/allReviews");
         const data = await response.json();
         setReviews(data);
         setLoading(false);

@@ -37,7 +37,7 @@ const Register = () => {
           navigate('/')
         })
         .catch(error=>{
-          console.log(error);
+          // console.log(error);
         })
         Swal.fire({
           title: "Registration Successful!",
@@ -50,7 +50,7 @@ const Register = () => {
         const errorCode = error.code;
         const errorMessage = error.message;
 
-        console.log(errorCode, errorMessage);
+        // console.log(errorCode, errorMessage);
       });
 
     //  password check section
@@ -77,7 +77,7 @@ const Register = () => {
 
     signInWithGoogle()
       .then((result) => {
-        console.log(result?.user?.name);
+        // console.log(result?.user?.name);
         navigate("/");
         Swal.fire({
           title: "Registration Successful!",
@@ -88,6 +88,13 @@ const Register = () => {
       })
       .catch((error) => {
         console.log("ERROR", error.message);
+        Swal.fire({
+          icon: "error",
+          title: "Login Failed",
+          text: "Invalid email or password. Please try again.",
+          confirmButtonText: "Retry",
+          confirmButtonColor: "#d33",
+        });
       });
   };
 
