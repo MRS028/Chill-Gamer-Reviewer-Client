@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -6,6 +6,9 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 
 const Login = () => {
+  useEffect(() => {
+    document.title = "Login | Chill Gamer";
+  }, [])
   const { userLogin, setUser,signInWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -53,7 +56,7 @@ const Login = () => {
             title: "Incorrect email or Password",
             text: "The password you entered is incorrect. Please try again.",
             confirmButtonText: "OK",
-            confirmButtonColor: "#f59e0b", // Amber color
+            confirmButtonColor: "#f59e0b", 
           });
           setError("Incorrect email or password. Please try again.");
         }

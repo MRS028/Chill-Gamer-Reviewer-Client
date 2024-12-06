@@ -41,24 +41,24 @@ const Navbar = () => {
 
   const links = (
     <>
-      <NavLink to="/" className="text-[#30beba]  hover:text-green-600">
+      <NavLink to="/" className="text-[#30beba]  hover:text-green-600 hover:underline">
         Home
       </NavLink>
-      <NavLink to="/reviews" className="text-[#30beba] hover:text-green-600">
+      <NavLink to="/reviews" className="text-[#30beba] hover:text-green-600 hover:underline">
         {" "}
         All Reviews
       </NavLink>
-      <NavLink to="/addReview" className="text-[#30beba] hover:text-green-600">
+      <NavLink to="/addReview" className="text-[#30beba] hover:text-green-600 hover:underline">
         Add Review
       </NavLink>
-      <NavLink to="/myreviews" className="text-[#30beba] hover:text-green-600">
+      <NavLink to="/myreviews" className="text-[#30beba] hover:text-green-600 hover:underline">
         My Reviews
       </NavLink>
       <NavLink
         to="/myWatchlist"
-        className="text-[#30beba] hover:text-green-600"
+        className="text-[#30beba] hover:text-green-600 hover:underline"
       >
-        Game Watchlist
+        My Watchlist
       </NavLink>
       <li>
         <input
@@ -109,7 +109,7 @@ const Navbar = () => {
                 </div>
                 <button
                   onClick={handleLogout}
-                  className="btn bg-red-500 hover:bg-red-700 font-semibold text-base-content "
+                  className="btn bg-red-500 hover:bg-red-700 font-semibold dark:text-white "
                 >
                   Log out <IoIosLogOut size={18} />
                 </button>
@@ -202,7 +202,7 @@ const Navbar = () => {
                 {user && user?.email ? (
                   <button
                     onClick={handleLogout}
-                    className="btn bg-red-500 text-white py-3 px-6 rounded-md hover:bg-red-700"
+                    className="btn bg-red-500 dark:text-white py-3 px-6 rounded-md hover:bg-red-700"
                   >
                     Logout <IoIosLogOut size={18} />
                   </button>

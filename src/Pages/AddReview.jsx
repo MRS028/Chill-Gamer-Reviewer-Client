@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../Provider/AuthProvider";
 
@@ -12,6 +12,9 @@ const AddReview = () => {
     publishingYear: "",
     genre: "",
   });
+  useEffect(() => {
+    document.title = "Add Review | Chill Gamer";
+  }, [])
 
   const userEmail = user?.email;
   const userName = user?.displayName;
@@ -202,7 +205,7 @@ const AddReview = () => {
               </option>
               <option value="Action">Action</option>
               <option value="RPG">RPG</option>
-              <option value="race">Race</option>
+              <option value="Race">Race</option>
               <option value="Adventure">Adventure</option>
               <option value="Sci-Fi">Sci-Fi</option>
               <option value="E-Sports">E-Sports</option>

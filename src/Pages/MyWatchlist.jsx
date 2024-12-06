@@ -6,14 +6,17 @@ import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
 
 const MyWatchlist = () => {
-  const [watchlist, setWatchlist] = useState([]); // All watchlist items
-  const [myWatchlist, setMyWatchlist] = useState([]); // Filtered items for user
-  const [loading, setLoading] = useState(false); // Loading state
-  const { user } = useContext(AuthContext); // Get logged-in user info
-
-  // Fetch all watchlist items
+  useEffect(() => {
+    document.title = "My Watchlists | Chill Gamer";
+  }, [])
+  const [watchlist, setWatchlist] = useState([]);
+  const [myWatchlist, setMyWatchlist] = useState([]); 
+  const [loading, setLoading] = useState(false); 
+  const { user } = useContext(AuthContext); 
+  
   useEffect(() => {
     const fetchWatchlist = async () => {
+
       try {
         setLoading(true);
         const response = await fetch("http://localhost:5000/watchlist");
@@ -39,7 +42,7 @@ const MyWatchlist = () => {
     }
   }, [watchlist, user?.email]);
 
-  // Delete Watchlist Item
+  // Delete Watchlist
   const handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -72,7 +75,7 @@ const MyWatchlist = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       <Fade direction="left" duration={1000} delay={500}>
-      <h1 className="text-3xl font-bold text-center mb-8 text-base-content">
+      <h1 className="text-3xl text-base-content font-bold text-center mb-8">
         My Watchlist
       </h1>
       </Fade>
@@ -81,10 +84,11 @@ const MyWatchlist = () => {
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full border-collapse border border-base-200 shadow-md rounded-lg">
-            <thead className="bg-[#30beba] text-base-content text-xl">
+            <thead className="bg-[#30beba]  dark:text-white text-xl">
               <tr>
                 <th className="px-6 py-3">NO</th>
                 <th className="px-6 py-3">Game Title</th>
+                <th className="px-6 py-3">Image</th>
                 <th className="px-6 py-3">Genre</th>
                 <th className="px-6 py-3">Rating</th>
                 <th className="px-10 py-3">Actions</th>
@@ -102,6 +106,7 @@ const MyWatchlist = () => {
                   <td className="border-t border-base-200 px-6 py-4 text-left">
                     {item.gameTitle}
                   </td>
+                  <td className="border-t border-base-200 px-8 py-4 text-left"><img className="w-10 h-10 rounded-xl" src={item.gameCover} alt="" /></td>
                   <td className="border-t border-base-200 px-6 py-4 text-left">
                     {item.genre}
                   </td>

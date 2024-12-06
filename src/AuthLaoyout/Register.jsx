@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -71,6 +71,10 @@ const Register = () => {
   };
 
   const handleGoogleSignIn = () => {
+    useEffect(() => {
+      document.title = "Register | Chill Gamer";
+    }, [])
+
     signInWithGoogle()
       .then((result) => {
         console.log(result?.user?.name);

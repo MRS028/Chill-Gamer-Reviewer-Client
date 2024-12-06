@@ -1,13 +1,38 @@
 import React, { useState, useEffect } from "react";
 import { BsArrowLeftCircleFill, BsArrowRightCircleFill } from "react-icons/bs";
-import banner1 from "../../assets/banner-1.jpg";
-import banner2 from "../../assets/banner-2.jpg";
 import banner4 from "../../assets/banner-4.jpg";
 import banner5 from "../../assets/banner-5.jpg";
 import banner6 from "../../assets/banner-6.jpg";
+import banner7 from "../../assets/banner-7.jpg";
+import { Link } from "react-router-dom";
+import { Typewriter } from "react-simple-typewriter";
 
-const BannerSlider = () => {
-  const slides = [banner2, banner1, banner4,banner6,banner5];
+const GamingBannerSlider = () => {
+  useEffect(() => {
+    document.title = "Home | Chill Gamer";
+  }, [])
+  const slides = [
+    {
+      image: banner4,
+      title: "Top 10 Gaming Consoles of 2024",
+      description: "Discover the best gaming consoles that rule the gaming world today.",
+    },
+    {
+      image: banner5,
+      title: "5 Upcoming RPGs You Can't Miss",
+      description: "Explore the most anticipated role-playing games set to release soon.",
+    },
+    {
+      image: banner6,
+      title: "Mastering Esports Tournaments",
+      description: "Learn how to compete and excel in global esports competitions.",
+    },
+    {
+      image: banner7,
+      title: "Gaming Tips for Beginners",
+      description: "Get started with essential tips for your gaming journey.",
+    },
+  ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -28,19 +53,35 @@ const BannerSlider = () => {
 
   return (
     <div className="relative w-full h-[500px]">
+      {/* Slide Image */}
       <div className="absolute inset-0">
         <img
-          src={slides[currentIndex]}
+          src={slides[currentIndex].image}
           alt={`Slide ${currentIndex + 1}`}
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="absolute top-1/2 transform -translate-y-1/2 left-5 cursor-pointer text-white text-4xl">
+      {/* Slide Content */}
+      <div className="absolute inset-0 mx-2 bg-opacity-50 text-white flex flex-col justify-center items-start p-8 lg:p-16">
+        <h2 className="text-4xl font-bold mb-4 text-[#30beba]">{} <Typewriter
+                words={[slides[currentIndex].title]} 
+                loop={10} 
+                cursor
+                cursorStyle="|"
+                typeSpeed={50}
+                deleteSpeed={25}
+              /></h2>
+        <p className="text-xl">{slides[currentIndex].description}</p>
+        <Link  to='/reviews' className="lg:mx-44 mx-32 my-5"><button className="btn  bg-[#30beba] text-white">View More</button> </Link>
+      </div>
+      {/* Navigation Buttons */}
+      <div className="absolute top-1/2 transform -translate-y-1/2 left-5 cursor-pointer text-base-content text-4xl">
         <BsArrowLeftCircleFill onClick={handlePrev} />
       </div>
-      <div className="absolute top-1/2 transform -translate-y-1/2 right-5 cursor-pointer text-white text-4xl">
+      <div className="absolute top-1/2 transform -translate-y-1/2 right-5 cursor-pointer text-base-content text-4xl">
         <BsArrowRightCircleFill onClick={handleNext} />
       </div>
+      {/* Dots Indicator */}
       <div className="absolute bottom-4 flex justify-center w-full">
         {slides.map((_, index) => (
           <div
@@ -56,4 +97,4 @@ const BannerSlider = () => {
   );
 };
 
-export default BannerSlider;
+export default GamingBannerSlider;

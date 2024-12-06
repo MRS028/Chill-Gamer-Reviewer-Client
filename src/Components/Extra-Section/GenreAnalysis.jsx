@@ -14,8 +14,6 @@ const GenreAnalysis = () => {
         const data = await response.json();
         setReviews(data);
         setLoading(false);
-
-        // Group data by genre
         const genreData = data.reduce((acc, review) => {
           const genre = review.genre;
           if (!acc[genre]) {
@@ -26,7 +24,7 @@ const GenreAnalysis = () => {
           return acc;
         }, {});
 
-        // Transform data into an array
+
         const genreStatsArray = Object.keys(genreData).map((genre) => ({
           genre,
           count: genreData[genre].count,
@@ -58,7 +56,7 @@ const GenreAnalysis = () => {
           Game Genre Analysis 📊
         </h2>
       </Fade>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 border-base-300 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {genreStats.map((stat) => (
           <Fade key={stat.genre} direction="up" cascade duration={800}>
             <div className="border border-base-200 shadow-lg rounded-lg p-6 bg-base-200">

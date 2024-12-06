@@ -10,7 +10,7 @@ const Home = () => {
         <Banner></Banner>
       </div>
       <div>
-        <HighestRatedGames></HighestRatedGames>{" "}
+        <HighestRatedGames></HighestRatedGames>
       </div>
 
       <div>

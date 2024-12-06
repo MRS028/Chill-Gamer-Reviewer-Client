@@ -48,10 +48,10 @@ const HighestRatedGames = () => {
               className="w-full h-40 object-cover rounded-md mb-4"
             />
             <h3 className="text-lg font-bold text-base-content">
-              {/* Typewriter effect for game title */}
+             
               <Typewriter
-                words={[game.gameTitle]} // Dynamically use the game title
-                loop={10} // Type only once
+                words={[game.gameTitle]} 
+                loop={10} 
                 cursor
                 cursorStyle="|"
                 typeSpeed={50}

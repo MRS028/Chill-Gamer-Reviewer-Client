@@ -2,19 +2,24 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 import { Fade } from "react-awesome-reveal";
+import Loading from "./Loading";
 
 const AllReviews = () => {
+  useEffect(() => {
+    document.title = "All Reviews | Chill Gamer";
+  }, []);
+  const [loading, setLoading]  = useState(true)
   const [sortCriteria, setSortCriteria] = useState("");
   const [filterGenre, setFilterGenre] = useState("");
   const [filteredReviews, setFilteredReviews] = useState([]);
 
   const reviews = useLoaderData();
 
-  useEffect(() => {
-    document.title = "All Reviews | Chill Gamer";
-  }, []);
+  
 
   useEffect(() => {
+    setLoading(true);
+
     let updatedReviews = [...reviews];
 
     if (filterGenre) {
@@ -22,8 +27,6 @@ const AllReviews = () => {
         (review) => review.genre === filterGenre
       );
     }
-
-    // Sort by Rating , Year
     if (sortCriteria === "rating-asc") {
       updatedReviews.sort((a, b) => a.rating - b.rating);
     } else if (sortCriteria === "rating-desc") {
@@ -35,7 +38,9 @@ const AllReviews = () => {
     }
 
     setFilteredReviews(updatedReviews);
-  }, [sortCriteria, filterGenre, reviews]);
+
+    setLoading(false);
+  }, [sortCriteria, filterGenre, reviews, setLoading]);
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
@@ -72,11 +77,17 @@ const AllReviews = () => {
         </select>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredReviews.map((review) => (
-          <ReviewCard key={review._id} review={review}></ReviewCard>
-        ))}
-      </div>
+      {loading ? (
+        
+        <Loading></Loading>
+      ) : (
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredReviews.map((review) => (
+            <ReviewCard key={review._id} review={review}></ReviewCard>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
