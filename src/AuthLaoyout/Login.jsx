@@ -7,12 +7,11 @@ import { AuthContext } from "../Provider/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { toast, ToastContainer } from "react-toastify";
 
-
 const Login = () => {
   useEffect(() => {
     document.title = "Login | Chill Gamer";
-  }, [])
-  const { userLogin, setUser,signInWithGoogle } = useContext(AuthContext);
+  }, []);
+  const { userLogin, setUser, signInWithGoogle } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -20,7 +19,6 @@ const Login = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
- 
 
   // console.log(location)
   // Login part
@@ -28,7 +26,6 @@ const Login = () => {
     e.preventDefault();
 
     if (!email || !password) {
-     
       setError("Email and Password are required.");
       return;
     }
@@ -38,7 +35,7 @@ const Login = () => {
       return;
     }
 
-    setError(""); 
+    setError("");
 
     userLogin(email, password)
       .then((result) => {
@@ -59,7 +56,7 @@ const Login = () => {
             title: "Incorrect email or Password",
             text: "The password you entered is incorrect. Please try again.",
             confirmButtonText: "OK",
-            confirmButtonColor: "#f59e0b", 
+            confirmButtonColor: "#f59e0b",
           });
           setError("Incorrect email or password. Please try again.");
         }
@@ -69,30 +66,25 @@ const Login = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
-        
         // console.log(result?.name);
-        navigate(location?.state ? location.state : "/"); 
+        navigate(location?.state ? location.state : "/");
         // toast.success("Log in successfull");
 
         Swal.fire({
           title: "Login Successful!",
           text: "Welcome back to Chill Gamer!",
-          icon: "success", 
-          showConfirmButton: false, 
-          timer: 1000, 
-          timerProgressBar: true, 
+          icon: "success",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
         });
 
-
-
-
-          // Swal.fire({
-          //   title: "Login Successful!",
-          //   text: "Welcome to Chill Gamer!",
-          //   icon: "success", 
-          //   confirmButtonText: "OK",
-          // });
-      
+        // Swal.fire({
+        //   title: "Login Successful!",
+        //   text: "Welcome to Chill Gamer!",
+        //   icon: "success",
+        //   confirmButtonText: "OK",
+        // });
       })
       .catch((error) => {
         Swal.fire({
@@ -103,10 +95,8 @@ const Login = () => {
           confirmButtonColor: "#d33",
         });
         // console.log("ERROR", error.message);
-        
       });
   };
-
 
   const navigateToForgetPassword = () => {
     navigate("/auth/forgetpassword", {

@@ -3,7 +3,9 @@ import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 const UpdateReviewPage = () => {
-  // Use the loader data to pre-fill the form
+  useEffect(() => {
+    document.title = "Update Review | Chill Gamer";
+  }, []);
   const reviewData = useLoaderData();
   const [formData, setFormData] = useState({
     gameCover: reviewData.gameCover,
@@ -12,7 +14,6 @@ const UpdateReviewPage = () => {
     reviewDescription: reviewData.reviewDescription,
     rating: reviewData.rating,
     genre: reviewData.genre,
-    
   });
 
   const navigate = useNavigate();
@@ -36,15 +37,35 @@ const UpdateReviewPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const reviewId = reviewData._id;
+    const isUnchanged =
+    formData.gameCover === reviewData.gameCover &&
+    formData.gameTitle === reviewData.gameTitle &&
+    formData.publishingYear === reviewData.publishingYear &&
+    formData.reviewDescription === reviewData.reviewDescription &&
+    formData.rating === reviewData.rating &&
+    formData.genre === reviewData.genre;
+
+
+    if(isUnchanged){
+      Swal.fire({
+        title: "No Changes Detected!",
+        text: "Please make some changes if you want.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
 
     // send data to the server
-    fetch(`https://chill-gamer-server-sigma.vercel.app/allReviews/${reviewId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
+    fetch(
+      `https://chill-gamer-server-sigma.vercel.app/allReviews/${reviewId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -54,11 +75,11 @@ const UpdateReviewPage = () => {
             icon: "success",
             confirmButtonText: "OK",
           });
-          navigate('/')
+          navigate("/");
         }
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
         Swal.fire({
           title: "Error",
           text: "Something went wrong. Please try again.",
@@ -72,12 +93,17 @@ const UpdateReviewPage = () => {
       <h1 className="text-3xl font-bold mb-6 text-base-content text-center">
         Update Review
       </h1>
-      <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form
+        onSubmit={handleSubmit}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
         {/* Left Column */}
         <div className="space-y-4 font-semibold text-xl text-base-content">
           <div>
             <label className="label">
-              <span className="label-text text-base-content">Game Cover URL</span>
+              <span className="label-text text-base-content">
+                Game Cover URL
+              </span>
             </label>
             <input
               name="gameCover"
@@ -106,7 +132,9 @@ const UpdateReviewPage = () => {
 
           <div>
             <label className="label">
-              <span className="label-text text-base-content">Publishing Year</span>
+              <span className="label-text text-base-content">
+                Publishing Year
+              </span>
             </label>
             <input
               type="number"
@@ -138,7 +166,9 @@ const UpdateReviewPage = () => {
         <div className="space-y-4 font-semibold text-xl text-base-content">
           <div>
             <label className="label">
-              <span className="label-text text-base-content">Review Description</span>
+              <span className="label-text text-base-content">
+                Review Description
+              </span>
             </label>
             <textarea
               name="reviewDescription"
@@ -219,4 +249,4 @@ const UpdateReviewPage = () => {
   );
 };
 
-export default UpdateReviewPage; 
+export default UpdateReviewPage;
