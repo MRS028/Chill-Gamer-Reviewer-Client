@@ -36,10 +36,11 @@ const RecentReviews = () => {
             key={review._id}
             className="bg-base-100 p-6 rounded-xl shadow-xl hover:bg-base-200 transition-all duration-300 ease-in-out transform hover:scale-105"
           >
-            <div className="flex justify-between items-center mb-4 text-center"></div>
+         
             <h3 className="text-2xl font-semibold  text-[#30beba] hover:text-green-600">
               {review.gameTitle}
             </h3>
+            <div className=" items-center mb-4 text-center"></div>
             <p className="text-yellow-500 font-semibold">
               Rating: {review.rating}/10
             </p>
@@ -47,10 +48,8 @@ const RecentReviews = () => {
               {/* {review.reviewDescription.substring(0, 150)}... */}
             </p>
             <p className="text-sm text-base-content">
-              Published:{" "}
-              <span className="text-gray-800">{review.publishingYear}</span>
+              Published:{review.publishingYear}
             </p>
-
             <Link
               to={`/review/${review._id}`}
               className="text-[#30beba] hover:underline mt-4 block"
