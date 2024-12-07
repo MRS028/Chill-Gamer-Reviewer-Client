@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Fade } from "react-awesome-reveal";
+import Loading from "../../Pages/Loading";
 
 const GenreAnalysis = () => {
   const [reviews, setReviews] = useState([]);
   const [genreStats, setGenreStats] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch user reviews from the API
   useEffect(() => {
     const fetchReviews = async () => {
       try {
@@ -44,7 +44,7 @@ const GenreAnalysis = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-96">
-        <p className="text-2xl font-bold text-gray-500">Loading genre analysis...</p>
+       <Loading></Loading>
       </div>
     );
   }

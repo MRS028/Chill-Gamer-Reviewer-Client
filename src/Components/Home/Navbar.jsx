@@ -24,8 +24,8 @@ const Navbar = () => {
       cancelButtonText: "Cancel",
       reverseButtons: true,
       customClass: {
-        confirmButton: "bg-red-600 text-white hover:bg-red-700", 
-        cancelButton: "bg-gray-400 text-white hover:bg-gray-500", 
+        confirmButton: "bg-red-600 text-white hover:bg-red-700",
+        cancelButton: "bg-gray-400 text-white hover:bg-gray-500",
       },
     }).then((result) => {
       if (result.isConfirmed) {
@@ -41,29 +41,70 @@ const Navbar = () => {
 
   const links = (
     <>
-      <NavLink to="/" className="text-[#30beba]  hover:text-green-600 hover:underline">
-        Home
-      </NavLink>
-      <NavLink to="/reviews" className="text-[#30beba] hover:text-green-600 hover:underline">
-        {" "}
-        All Reviews
-      </NavLink>
-      <NavLink to="/addReview" className="text-[#30beba] hover:text-green-600 hover:underline">
-        Add Review
-      </NavLink>
-      <NavLink to="/myreviews" className="text-[#30beba] hover:text-green-600 hover:underline">
-        My Reviews
-      </NavLink>
-      <NavLink
-        to="/myWatchlist"
-        className="text-[#30beba] hover:text-green-600 hover:underline"
-      >
-        My Watchlist
-      </NavLink>
-      <li>
+      <li className="inline-block mx-4">
+        <NavLink
+          to="/"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#30beba] hover:text-green-600 hover:underline  transition-all duration-300 text-lg font-bold"
+              : "text-[#30beba] hover:text-green-600 hover:underline font-medium transition-all duration-300"
+          }
+        >
+          Home
+        </NavLink>
+      </li>
+      <li className="inline-block mx-4">
+        <NavLink
+          to="/reviews"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#30beba] hover:text-green-600 hover:underline  transition-all duration-300 text-lg font-bold"
+              : "text-[#30beba] hover:text-green-600 hover:underline font-medium transition-all duration-300"
+          }
+        >
+          All Reviews
+        </NavLink>
+      </li>
+      <li className="inline-block mx-4">
+        <NavLink
+          to="/addReview"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#30beba] hover:text-green-600 hover:underline font-bold transition-all duration-300 text-lg "
+              : "text-[#30beba] hover:text-green-600 hover:underline font-medium transition-all duration-300"
+          }
+        >
+          Add Review
+        </NavLink>
+      </li>
+      <li className="inline-block mx-4">
+        <NavLink
+          to="/myreviews"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#30beba] hover:text-green-600 hover:underline transition-all duration-300 text-lg font-bold"
+              : "text-[#30beba] hover:text-green-600 hover:underline font-medium transition-all duration-300"
+          }
+        >
+          My Reviews
+        </NavLink>
+      </li>
+      <li className="inline-block mx-4">
+        <NavLink
+          to="/myWatchlist"
+          className={({ isActive }) =>
+            isActive
+              ? "text-[#30beba] hover:text-green-600 hover:underline  transition-all duration-300 text-lg font-bold"
+              : "text-[#30beba] hover:text-green-600 hover:underline font-medium transition-all duration-300"
+          }
+        >
+          My Watchlist
+        </NavLink>
+      </li>
+      <li className="inline-block mx-4">
         <input
           type="checkbox"
-          className="toggle"
+          className="toggle toggle-primary"
           onChange={() => {
             const theme =
               document.documentElement.getAttribute("data-theme") === "dark"
@@ -73,9 +114,9 @@ const Navbar = () => {
             localStorage.setItem("theme", theme);
           }}
           defaultChecked={(() => {
-            const savedTheme = localStorage.getItem("theme") || "light"; 
+            const savedTheme = localStorage.getItem("theme") || "light";
             document.documentElement.setAttribute("data-theme", savedTheme);
-            return savedTheme === "dark"; 
+            return savedTheme === "dark";
           })()}
         />
       </li>
@@ -85,10 +126,17 @@ const Navbar = () => {
   return (
     <div>
       <nav className="shadow-lg  text-gray-200 ">
-        <div className="container mx-auto flex items-center justify-between py-4 px-6">
+        <div className="container mx-auto flex items-center justify-between py-2 px-6">
           {/* Logo */}
           <h1 className="text-xl md:text-2xl font-bold text-[#30beba] hover:text-green-600">
-            <img className="w-14  rounded-full inline-block" src={logo} alt="" /> Chill Gamer
+            <img
+              className="w-14  rounded-full inline-block"
+              src={logo}
+              alt=""
+            />{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#ff7a00] to-[#30beba] text-shadow-lg hover:scale-110 transform transition-all duration-300">
+              Chill Gamer
+            </span>
           </h1>
 
           {/* Desktop Menu */}

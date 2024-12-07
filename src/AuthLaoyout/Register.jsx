@@ -6,8 +6,11 @@ import AuthProvider, { AuthContext } from "../Provider/AuthProvider";
 import Swal from "sweetalert2";
 
 const Register = () => {
+  useEffect(() => {
+    document.title = "Register | Chill Gamer";
+  }, []);
   // Export from Authprovider
-  const { createNewUser, user, setUser,updateUserProfile, signInWithGoogle } =
+  const { createNewUser, user, setUser, updateUserProfile, signInWithGoogle } =
     useContext(AuthContext);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -33,12 +36,12 @@ const Register = () => {
         setUser(user);
         // console.log(user);
         updateUserProfile({ displayName: name, photoURL: photourl })
-        .then(result=>{
-          navigate('/')
-        })
-        .catch(error=>{
-          // console.log(error);
-        })
+          .then((result) => {
+            navigate("/");
+          })
+          .catch((error) => {
+            // console.log(error);
+          });
         Swal.fire({
           title: "Registration Successful!",
           text: "Welcome to our platform!",
@@ -71,10 +74,6 @@ const Register = () => {
   };
 
   const handleGoogleSignIn = () => {
-    useEffect(() => {
-      document.title = "Register | Chill Gamer";
-    }, [])
-
     signInWithGoogle()
       .then((result) => {
         // console.log(result?.user?.name);

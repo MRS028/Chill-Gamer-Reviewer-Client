@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
-import { FaTrashAlt } from "react-icons/fa"; // Import React Icons
+import { FaTrashAlt } from "react-icons/fa"; 
 import Loading from "./Loading";
 import Swal from "sweetalert2";
 import { Fade } from "react-awesome-reveal";
@@ -21,7 +21,7 @@ const MyWatchlist = () => {
         setLoading(true);
         const response = await fetch("https://chill-gamer-server-sigma.vercel.app/watchlist");
         const data = await response.json();
-        setWatchlist(data); // Store all watchlist data
+        setWatchlist(data); 
         setLoading(false);
       } catch (error) {
         console.error("Error fetching watchlist:", error);
@@ -32,7 +32,7 @@ const MyWatchlist = () => {
     fetchWatchlist();
   }, []);
 
-  // Filter items for logged-in user
+ 
   useEffect(() => {
     if (user?.email) {
       const filteredWatchlist = watchlist.filter(

@@ -105,7 +105,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center md:py-8 text-base-content ">
+    <div className="flex  min-h-screen items-center justify-center md:py-8 text-base-content ">
       <div className="w-11/12 max-w-md bg-base-200 rounded-lg shadow-md p-6 border">
         <h2 className="text-2xl font-semibold text-center text-base-content mb-6">
           Login

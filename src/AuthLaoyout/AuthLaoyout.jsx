@@ -1,9 +1,7 @@
 import React from 'react';
-import Login from './Login';
 import Header from '../Components/Header';
 import Footer from '../Components/Home/Footer';
 import { Outlet } from 'react-router-dom';
-import Navbar from '../Components/Home/Navbar';
 
 const AuthLaoyout = () => {
     return (

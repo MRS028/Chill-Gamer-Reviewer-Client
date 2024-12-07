@@ -8,7 +8,7 @@ const AllReviews = () => {
   useEffect(() => {
     document.title = "All Reviews | Chill Gamer";
   }, []);
-  const [loading, setLoading]  = useState(true)
+  const [loading, setLoading]  = useState(true);
   const [sortCriteria, setSortCriteria] = useState("");
   const [filterGenre, setFilterGenre] = useState("");
   const [filteredReviews, setFilteredReviews] = useState([]);
@@ -41,6 +41,14 @@ const AllReviews = () => {
 
     setLoading(false);
   }, [sortCriteria, filterGenre, reviews, setLoading]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center">
+       <Loading/>
+      </div>
+    );
+  }
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">

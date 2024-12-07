@@ -86,22 +86,27 @@ const ReviewDetails = () => {
       <div className="lg:ml-6 text-base-content">
         <h2 className="text-2xl my-5 lg:text-3xl font-bold mb-4">{review.gameTitle}</h2>
         <p className="text-lg mb-3">
-          <strong>Genre:</strong>
+          <strong>Genre: </strong>
           <span className="font-medium text-[#30beba]">{review.genre}</span>
         </p>
         <p className="text-lg mb-3">
-          <strong>Rating:</strong>
+          <strong>Rating: </strong>
           <span className="font-medium text-yellow-500">{review.rating}/10</span>
         </p>
         <p className="text-lg mb-3">
-          <strong>Reviewer:</strong>
-          <span className="font-medium text-[#30beba]">{review.userName}</span>
+          <strong>Published: </strong>
+          <span className="font-medium text-green-500">{review.publishingYear}</span>
         </p>
         <p className="text-lg mb-3">
-          <strong>Email:</strong> <span className="font-medium">{review.userEmail}</span>
+          <strong>Reviewer: </strong>
+          <span className="font-medium text-[#30beba]">{review.userName}</span>
+        </p>
+        <p className="text-lg mb-3 opacity-90">
+          <strong>Email: </strong> <span className="font-medium">{review.userEmail}</span>
         </p>
         <div className="w-[95%] mx-auto text-center">
-        <p className="  text-base-content mb-6 text-justify leading-relaxed">
+        
+        <p className="  text-base-content mb-6 text-justify leading-relaxed opacity-80"><strong>Description: </strong>
           {review.reviewDescription}
         </p>
         </div>
