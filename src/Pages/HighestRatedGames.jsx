@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Loading from "./Loading";
 import { Fade } from "react-awesome-reveal";
-import { Typewriter } from "react-simple-typewriter"; // Import Typewriter
+import { Typewriter } from "react-simple-typewriter";  
 
 const HighestRatedGames = () => {
   const [highestRatedGames, setHighestRatedGames] = useState([]);
@@ -14,11 +14,11 @@ const HighestRatedGames = () => {
       .then((res) => res.json())
       .then((data) => {
         setHighestRatedGames(data);
-        setLoading(false); 
+        setLoading(false);
       })
       .catch((error) => {
         console.error("Error", error);
-        setLoading(false); 
+        setLoading(false);
       });
   }, []);
 
@@ -39,27 +39,30 @@ const HighestRatedGames = () => {
             key={game._id}
             className="border border-base-200 p-4 shadow-lg rounded-lg  bg-base-200"
           >
-           
             <img
               src={game.gameCover}
               alt={game.gameTitle}
               className="w-full h-48 object-cover rounded-md mb-4"
             />
-           
-            <h3 className="text-lg font-bold text-base-content">
-             
+
+            <h3 className="text-lg font-extrabold text-base-content mb-3 line-clamp-1">
               <Typewriter
-                words={[game.gameTitle]} 
-                loop={10} 
+                words={[game.gameTitle]}
+                loop={10}
                 cursor
                 cursorStyle="|"
                 typeSpeed={50}
                 deleteSpeed={25}
               />
             </h3>
-            <p className="text-sm text-base-content"><strong className="opacity-80">Genre:</strong> {game.genre}</p>
             <p className="text-sm text-base-content">
-              <strong className="opacity-80">Rating:</strong > <span className="text-yellow-500 font-bold">{game.rating.toFixed(1)}/10</span>
+              <strong className="opacity-80">Genre:</strong> {game.genre}
+            </p>
+            <p className="text-sm text-base-content">
+              <strong className="opacity-80">Rating:</strong>{" "}
+              <span className="text-yellow-500 font-bold">
+                {game.rating.toFixed(1)}/10
+              </span>
             </p>
             <p className="mt-4 text-base-content opacity-85">
               {game.reviewDescription.slice(0, 110)}...

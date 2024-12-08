@@ -9,7 +9,7 @@ const RecentReviews = () => {
   const { loading, setLoading } = useContext(AuthContext);
 
   useEffect(() => {
-    fetch("https://chill-gamer-server-sigma.vercel.app/allReviews")
+    fetch("https://chill-gamer-server-sigma.vercel.app/recentReviews")
       .then((res) => res.json())
       .then((data) => setReviews(data.slice(0, 6)));
   }, []);
@@ -32,9 +32,9 @@ const RecentReviews = () => {
 
       <ul className="space-y-6">
         {reviews.map((review) => (
-          <li
+          <div
             key={review._id}
-            className="bg-base-100 p-6 rounded-xl shadow-xl hover:bg-base-200 transition-all duration-300 ease-in-out transform hover:scale-105"
+            className="bg-base-100 p-6 border rounded-xl shadow-xl hover:bg-base-200 transition-all duration-300 ease-in-out transform hover:scale-105"
           >
          
             <h3 className="text-2xl font-semibold  text-[#30beba] hover:text-green-600">
@@ -56,7 +56,7 @@ const RecentReviews = () => {
             >
               Read full review
             </Link>
-          </li>
+          </div>
         ))}
       </ul>
     </div>

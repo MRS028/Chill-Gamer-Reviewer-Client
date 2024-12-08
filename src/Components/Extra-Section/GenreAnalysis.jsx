@@ -52,15 +52,15 @@ const GenreAnalysis = () => {
   return (
     <div className="max-w-7xl mx-auto px-6 py-10">
       <Fade direction="down" duration={1000}>
-        <h2 className="text-3xl font-bold text-center mb-8 text-base-content">
+        <h2 className="text-3xl font-bold text-center mb-8 text-base-content ">
           Game Genre Analysis 📊
         </h2>
       </Fade>
       <div className="grid grid-cols-1 border-base-300 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {genreStats.map((stat) => (
           <Fade key={stat.genre} direction="up" cascade duration={800}>
-            <div className="border border-base-200 shadow-lg rounded-lg p-6 bg-base-200">
-              <h3 className="text-lg font-bold text-base-content">{stat.genre}</h3>
+            <div className="border border-base-200 shadow-lg rounded-lg p-6 bg-base-200 ">
+              <h3 className="text-lg font-bold text-[#30beba] hover:text-green-600 ">{stat.genre}</h3>
               <p className="text-sm text-base-content">
                 <span className="font-semibold">Total Games:</span> {stat.count}
               </p>

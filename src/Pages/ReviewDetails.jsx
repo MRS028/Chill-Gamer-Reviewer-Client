@@ -84,7 +84,7 @@ const ReviewDetails = () => {
       />
       {/* Details Section */}
       <div className="lg:ml-6 text-base-content">
-        <h2 className="text-2xl my-5 lg:text-3xl font-bold mb-4">{review.gameTitle}</h2>
+        <h2 className="text-2xl my-5  lg:text-3xl mb-4  font-extrabold text-base-content  line-clamp-1">{review.gameTitle}</h2>
         <p className="text-lg mb-3">
           <strong>Genre: </strong>
           <span className="font-medium text-[#30beba]">{review.genre}</span>

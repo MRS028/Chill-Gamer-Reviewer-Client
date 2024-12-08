@@ -15,7 +15,6 @@ const UpdateReviewPage = () => {
     rating: reviewData.rating,
     genre: reviewData.genre,
   });
-  
 
   const navigate = useNavigate();
 
@@ -37,9 +36,9 @@ const UpdateReviewPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const reviewId = reviewData._id;
-  
+
     // Check if data has changed
     const isUnchanged =
       formData.gameCover === reviewData.gameCover &&
@@ -48,7 +47,7 @@ const UpdateReviewPage = () => {
       formData.reviewDescription === reviewData.reviewDescription &&
       parseInt(formData.rating, 10) === reviewData.rating &&
       formData.genre === reviewData.genre;
-  
+
     if (isUnchanged) {
       Swal.fire({
         title: "No Changes Detected!",
@@ -56,24 +55,27 @@ const UpdateReviewPage = () => {
         icon: "error",
         confirmButtonText: "OK",
       });
-      return; // Stop further execution
+      return;
     }
-  
-    // Prepare data with converted numbers
+
+    //update
     const updatedReview = {
       ...formData,
       publishingYear: parseInt(formData.publishingYear, 10) || 0,
       rating: parseInt(formData.rating, 10) || 0,
     };
-  
+
     // Send data to the server
-    fetch(`https://chill-gamer-server-sigma.vercel.app/allReviews/${reviewId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedReview),
-    })
+    fetch(
+      `https://chill-gamer-server-sigma.vercel.app/allReviews/${reviewId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedReview),
+      }
+    )
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -95,7 +97,7 @@ const UpdateReviewPage = () => {
         });
       });
   };
-  
+
   // console.log(typeof rating)
   return (
     <div className="max-w-6xl mx-auto p-6 bg-base-100 shadow-md border rounded-md mt-10 mb-12">
