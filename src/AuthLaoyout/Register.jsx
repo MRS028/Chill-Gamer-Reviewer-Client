@@ -42,12 +42,14 @@ const Register = () => {
           .catch((error) => {
             // console.log(error);
           });
-        Swal.fire({
-          title: "Registration Successful!",
-          text: "Welcome to our platform!",
-          icon: "success",
-          confirmButtonText: "OK",
-        });
+          Swal.fire({
+            title: "Registration Successful!",
+            text: "Welcome to Chill Gamer!",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1000,
+            timerProgressBar: true,
+          });
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -80,9 +82,11 @@ const Register = () => {
         navigate("/");
         Swal.fire({
           title: "Registration Successful!",
-          text: "Welcome to our platform!",
+          text: "Welcome to Chill Gamer!",
           icon: "success",
-          confirmButtonText: "OK",
+          showConfirmButton: false,
+          timer: 1000,
+          timerProgressBar: true,
         });
       })
       .catch((error) => {

@@ -8,7 +8,7 @@ const ReviewCard = ({ review }) => {
   }, [])
   const { _id, gameCover, gameTitle, genre, rating, userName, publishingYear } =
     review;
-
+// console.log(typeof rating)
   return (
     <div className="relative group bg-gradient-to-br from-gray-100 to-gray-300 transition-transform duration-500 group-hover:scale-110 rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl cursor-pointer">
     <div className="relative w-[430px] h-56 overflow-hidden">

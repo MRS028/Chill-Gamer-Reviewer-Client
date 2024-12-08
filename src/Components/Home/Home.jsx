@@ -5,9 +5,11 @@ import GenreAnalysis from "../Extra-Section/GenreAnalysis";
 import RecentReviews from "../Extra-Section/RecentReviews";
 
 
+
 const Home = () => {
   return (
     <section>
+      
       <div>
         <Banner></Banner>
       </div>
@@ -21,6 +23,7 @@ const Home = () => {
       <div>
        <RecentReviews></RecentReviews>
       </div>
+      
     </section>
   );
 };

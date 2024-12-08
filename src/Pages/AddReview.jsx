@@ -34,53 +34,48 @@ const AddReview = () => {
       rating,
       genre,
     } = formData;
-
+  
     const newReview = {
       gameCover,
       gameTitle,
-      publishingYear,
+      publishingYear: parseInt(publishingYear, 10) || 0, 
       userEmail,
       reviewDescription,
-      rating,
+      rating: parseInt(rating, 10) || 0, 
       genre,
       userName,
     };
-
-    // console.log(newReview);
-
-
-    fetch("https://chill-gamer-server-sigma.vercel.app/allreviews",{
-        method: 'POST',
-        headers : {
-            'content-type' : 'application/json'
-        },
-        body: JSON.stringify(newReview)
+  
+    fetch("https://chill-gamer-server-sigma.vercel.app/allreviews", {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify(newReview), 
     })
-    .then(res=> res.json())
-    .then(data=>{
-        if(data.insertedId){
-            Swal.fire({
-                title: "Success!",
-                text: "Your review has been submitted successfully.",
-                icon: "success",
-                confirmButtonText: "OK",
-              });
-
-        }
-        // console.log(data);
-    })
-
+    .then(res => res.json())
+    .then(data => {
+      if (data.insertedId) {
+        Swal.fire({
+          title: "Success!",
+          text: "Your review has been submitted successfully.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+      }
+    });
     
-
+  
     setFormData({
       gameCover: "",
       gameTitle: "",
       reviewDescription: "",
-      rating: "",
+      rating: "", 
       publishingYear: "",
       genre: "",
     });
   };
+  
 
   return (
     <div className="max-w-6xl mx-auto p-6 bg-base-100 shadow-md border rounded-md mt-10 mb-12">

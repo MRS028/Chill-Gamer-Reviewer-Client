@@ -15,6 +15,7 @@ const UpdateReviewPage = () => {
     rating: reviewData.rating,
     genre: reviewData.genre,
   });
+  
 
   const navigate = useNavigate();
 
@@ -36,36 +37,43 @@ const UpdateReviewPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+  
     const reviewId = reviewData._id;
+  
+    // Check if data has changed
     const isUnchanged =
-    formData.gameCover === reviewData.gameCover &&
-    formData.gameTitle === reviewData.gameTitle &&
-    formData.publishingYear === reviewData.publishingYear &&
-    formData.reviewDescription === reviewData.reviewDescription &&
-    formData.rating === reviewData.rating &&
-    formData.genre === reviewData.genre;
-
-
-    if(isUnchanged){
+      formData.gameCover === reviewData.gameCover &&
+      formData.gameTitle === reviewData.gameTitle &&
+      parseInt(formData.publishingYear, 10) === reviewData.publishingYear &&
+      formData.reviewDescription === reviewData.reviewDescription &&
+      parseInt(formData.rating, 10) === reviewData.rating &&
+      formData.genre === reviewData.genre;
+  
+    if (isUnchanged) {
       Swal.fire({
         title: "No Changes Detected!",
         text: "Please make some changes if you want.",
         icon: "error",
         confirmButtonText: "OK",
       });
+      return; // Stop further execution
     }
-
-    // send data to the server
-    fetch(
-      `https://chill-gamer-server-sigma.vercel.app/allReviews/${reviewId}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      }
-    )
+  
+    // Prepare data with converted numbers
+    const updatedReview = {
+      ...formData,
+      publishingYear: parseInt(formData.publishingYear, 10) || 0,
+      rating: parseInt(formData.rating, 10) || 0,
+    };
+  
+    // Send data to the server
+    fetch(`https://chill-gamer-server-sigma.vercel.app/allReviews/${reviewId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedReview),
+    })
       .then((res) => res.json())
       .then((data) => {
         if (data.modifiedCount) {
@@ -87,7 +95,8 @@ const UpdateReviewPage = () => {
         });
       });
   };
-
+  
+  // console.log(typeof rating)
   return (
     <div className="max-w-6xl mx-auto p-6 bg-base-100 shadow-md border rounded-md mt-10 mb-12">
       <h1 className="text-3xl font-bold mb-6 text-base-content text-center">

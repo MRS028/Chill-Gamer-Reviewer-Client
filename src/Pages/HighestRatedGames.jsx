@@ -9,19 +9,17 @@ const HighestRatedGames = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchHighestRatedGames = async () => {
-      try {
-        const response = await fetch("https://chill-gamer-server-sigma.vercel.app/highestRatedGames");
-        const data = await response.json();
+    // Fetching the highest-rated games
+    fetch("https://chill-gamer-server-sigma.vercel.app/highestRatedGames")
+      .then((res) => res.json())
+      .then((data) => {
         setHighestRatedGames(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching highest-rated games:", error);
-        setLoading(false);
-      }
-    };
-
-    fetchHighestRatedGames();
+        setLoading(false); 
+      })
+      .catch((error) => {
+        console.error("Error", error);
+        setLoading(false); 
+      });
   }, []);
 
   if (loading) {
