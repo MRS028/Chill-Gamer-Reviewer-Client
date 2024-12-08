@@ -106,7 +106,7 @@ const Footer = () => {
         <p>
           Made with ❤️ by{" "}
           <a
-            href="https://github.com/your-profile"
+            href="https://github.com/MRS028"
             className="text-blue-400 hover:text-blue-500"
           >
            <strong className="text-[#30beba]"> Md.Rifat Sheikh</strong>

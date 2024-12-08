@@ -43,14 +43,14 @@ const ForgetPassword = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-      <div className="w-full max-w-md bg-gray-100 rounded-lg shadow-md p-6 border">
-        <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">Forgot Password</h2>
-        <p className="text-sm text-gray-500 text-center mb-4">
+      <div className="w-full max-w-md bg-base-100 rounded-lg shadow-md p-6 border">
+        <h2 className="text-2xl font-semibold text-center text-base-content mb-6">Forgot Password</h2>
+        <p className="text-sm text-base-content text-center mb-4">
           Enter your email address and we will send you a link to reset your password.
         </p>
         <form onSubmit={handleResetPassword} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-left text-sm font-medium text-gray-700">Email</label>
+            <label htmlFor="email" className="block text-left text-sm font-medium text-base-content">Email</label>
             <input
               type="email"
               id="email"
@@ -60,9 +60,9 @@ const ForgetPassword = () => {
               className="w-full mt-1 p-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-          <button type="submit" className="w-full py-2 px-4 bg-green-600 text-white font-medium rounded-md hover:bg-green-700">Send Reset Link</button>
+          <button type="submit" className="w-full py-2 px-4 bg-[#30beba] text-white font-medium rounded-md hover:bg-green-700">Send Reset Link</button>
         </form>
-        <p className="text-sm text-center text-gray-500 mt-6">
+        <p className="text-sm text-center text-base-content mt-6">
           Remembered your password?{' '}
           <span onClick={() => navigate('/auth/login')} className="text-blue-500 hover:underline cursor-pointer">Login</span>
         </p>
